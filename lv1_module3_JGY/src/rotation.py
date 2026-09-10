@@ -29,7 +29,7 @@ __all__ = [
 
 def rot_x(theta: float) -> np.ndarray:
     """x축 기준 회전 행렬 (theta 는 **라디안**). x 성분은 보존된다."""
-    # TODO: 문제 2-1
+    return np.array([[1,0,0], [0, np.cos(theta), -np.sin(theta)], [0, np.sin(theta), np.cos(theta)]])
     raise NotImplementedError("rot_x 를 구현하세요")
 
 
@@ -38,13 +38,13 @@ def rot_y(theta: float) -> np.ndarray:
 
     부호 배치가 x·z 와 반대로 보이는 이유는 노트북 2-1 에서 설명한다.
     """
-    # TODO: 문제 2-1
+    return np.array([[np.cos(theta),0,np.sin(theta)], [0,1,0], [-np.sin(theta),0,np.cos(theta)]])
     raise NotImplementedError("rot_y 를 구현하세요")
 
 
 def rot_z(theta: float) -> np.ndarray:
     """z축 기준 회전 행렬 (theta 는 라디안). z 성분은 보존된다."""
-    # TODO: 문제 2-1
+    return np.array([[np.cos(theta),-np.sin(theta),0], [np.sin(theta),np.cos(theta),0], [0,0,1]])
     raise NotImplementedError("rot_z 를 구현하세요")
 
 
@@ -57,7 +57,7 @@ def rodrigues(axis, theta: float) -> np.ndarray:
       (정규화되지 않은 축을 넣어도 같은 결과가 나와야 한다).
     - 문제 1 의 `skew` 를 반드시 사용한다.
     """
-    # TODO: 문제 2-5
+    return np.array([[1,0,0],[0,1,0],[0,0,1]])
     raise NotImplementedError("rodrigues 를 구현하세요")
 
 
