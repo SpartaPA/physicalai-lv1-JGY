@@ -132,7 +132,14 @@ def axis_angle_from_matrix(R, atol: float = 1e-8):
     axis : 단위 회전축 (3,)
     angle : 회전각 [rad], 0 <= angle <= pi
     """
-    
+    angle = np.arccos((np.trace(R) - 1) / 2)
+    axis = np.array([
+        R[2, 1] - R[1, 2],
+        R[0, 2] - R[2, 0],
+        R[1, 0] - R[0, 1],
+    ])
+    axis = normalize(axis)
+    return axis, angle
     raise NotImplementedError("axis_angle_from_matrix 를 구현하세요")
 
 
@@ -144,5 +151,11 @@ def quaternion_from_axis_angle(axis, angle: float) -> np.ndarray:
     반환 순서는 SciPy `Rotation.as_quat()` 와 같은 **(x, y, z, w)** 로 맞춘다
     (그래야 문제 6-5 에서 바로 비교할 수 있다).
     """
-    # TODO: 문제 6-5
+    axis = normalize(axis)
+    return np.array([
+        axis[0] * np.sin(angle / 2),
+        axis[1] * np.sin(angle / 2),
+        axis[2] * np.sin(angle / 2),
+        np.cos(angle / 2),
+    ])
     raise NotImplementedError("quaternion_from_axis_angle 을 구현하세요")
