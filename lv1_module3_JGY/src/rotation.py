@@ -99,7 +99,7 @@ def orthogonality_error(R) -> float:
 
     완전한 직교행렬이면 0 이고, 클수록 직교성이 무너진 것이다.
     """
-    
+    return np.linalg.norm(R.T @ R - np.identity(3))
     raise NotImplementedError("orthogonality_error 를 구현하세요")
 
 
@@ -109,7 +109,7 @@ def is_rotation(R, atol: float = 1e-8) -> bool:
     det = -1 이면 직교이긴 하지만 반사가 섞여 있어 회전이 아니다.
     3x3 이 아니면 False.
     """
-    # TODO: 문제 3-2
+    return np.allclose(R.T @ R, np.identity(3)) and np.isclose(det(R), 1)
     raise NotImplementedError("is_rotation 을 구현하세요")
 
 
@@ -132,7 +132,7 @@ def axis_angle_from_matrix(R, atol: float = 1e-8):
     axis : 단위 회전축 (3,)
     angle : 회전각 [rad], 0 <= angle <= pi
     """
-    # TODO: 문제 6-4
+    
     raise NotImplementedError("axis_angle_from_matrix 를 구현하세요")
 
 
