@@ -46,7 +46,7 @@ def inv_T(T) -> np.ndarray:
 
     4x4 가 아니면 ValueError.
     """
-    # TODO: 문제 5-1
+    
     raise NotImplementedError("inv_T 를 구현하세요")
 
 
