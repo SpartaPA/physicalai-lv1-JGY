@@ -57,7 +57,9 @@ def rodrigues(axis, theta: float) -> np.ndarray:
       (정규화되지 않은 축을 넣어도 같은 결과가 나와야 한다).
     - 문제 1 의 `skew` 를 반드시 사용한다.
     """
-    return np.array([[1,0,0],[0,1,0],[0,0,1]])
+    I = np.array([[1,0,0],[0,1,0],[0,0,1]])
+    K = skew(axis)
+    return I + np.sin(theta)*K + (1-np.cos(theta))*K @ K
     raise NotImplementedError("rodrigues 를 구현하세요")
 
 
@@ -76,7 +78,19 @@ def gram_schmidt(A) -> np.ndarray:
     수치적으로는 성분을 빼자마자 갱신하는 modified Gram-Schmidt 가 더 안정적이다.
     앞선 열들에 종속인 열이 있으면 ValueError.
     """
-    # TODO: 문제 3-2
+    A = np.asarray(A, dtype=float)
+    Q = A.copy()
+    for j in range(A.shape[1]):
+        q_j = Q[:, j]
+        for i in range(j):
+            q_i = Q[:, i]
+            Q[:, j] = q_j - np.dot(q_i, q_j) * q_i
+        q_j = Q[:, j]
+        norm = np.linalg.norm(q_j)
+        if norm < 1e-10:
+            raise ValueError("앞선 열들에 종속인 열이 있습니다")
+        Q[:, j] = q_j / norm
+    return Q
     raise NotImplementedError("gram_schmidt 를 구현하세요")
 
 
@@ -85,7 +99,7 @@ def orthogonality_error(R) -> float:
 
     완전한 직교행렬이면 0 이고, 클수록 직교성이 무너진 것이다.
     """
-    # TODO: 문제 3-1
+    
     raise NotImplementedError("orthogonality_error 를 구현하세요")
 
 
