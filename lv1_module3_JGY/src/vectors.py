@@ -225,7 +225,9 @@ def inverse_gauss_jordan(A) -> np.ndarray:
     정사각이 아니면 ValueError, 특이행렬이면 np.linalg.LinAlgError.
     (`np.linalg.inv` 를 부르지 말고 소거로 직접 구한다)
     """
-
-    # TODO: 문제 4-3
-
+    I = np.array([[1,0,0],[0,1,0],[0,0,1]])
+    A_I = np.concatenate((A,I),axis=1)
+    A,I = row_echelon(A_I)
+    if A == np.array([[1,0,0],[0,1,0],[0,0,1]]):
+        return I
     raise NotImplementedError("inverse_gauss_jordan 을 구현하세요")

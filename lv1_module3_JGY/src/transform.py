@@ -31,7 +31,7 @@ def make_T(R, t) -> np.ndarray:
 
     R 이 3x3 이 아니면 ValueError.
     """
-    # TODO: 문제 5-1
+    return np.ndarray([[R,t],[0,1]])
     raise NotImplementedError("make_T 를 구현하세요")
 
 
