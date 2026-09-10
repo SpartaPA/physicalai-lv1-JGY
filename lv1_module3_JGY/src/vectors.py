@@ -225,5 +225,7 @@ def inverse_gauss_jordan(A) -> np.ndarray:
     정사각이 아니면 ValueError, 특이행렬이면 np.linalg.LinAlgError.
     (`np.linalg.inv` 를 부르지 말고 소거로 직접 구한다)
     """
-    for 
+
+    # TODO: 문제 4-3
+
     raise NotImplementedError("inverse_gauss_jordan 을 구현하세요")
