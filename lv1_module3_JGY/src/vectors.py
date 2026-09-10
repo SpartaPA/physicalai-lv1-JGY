@@ -158,18 +158,25 @@ def row_echelon(A, pivoting: bool = True):
     U : (m, n) 상삼각 형태 행렬
     pivot_cols : 피벗이 선 열 인덱스 리스트
     n_swaps : 행 교환 횟수 (행렬식 부호 계산에 필요)
-
-    힌트: 0 인지 판정할 때는 `== 0` 대신 허용오차(tol)를 쓴다.
-          예) tol = max(m, n) * np.finfo(float).eps * max(1.0, np.max(np.abs(U)))
     """
-    # TODO: 문제 1-6 / 문제 4
-    return 
+
+    m, n = A.shape
+    tol = max(m, n) * np.finfo(float).eps * max(1.0, np.max(np.abs(m,n)))
+    for row_echelon,row_value in A:
+        row_echelon = np.array(row_echelon)
+        row_value = np.array(row_value)
+        if np.all(row_value == 0):
+            continue
+        if np.abs(row_value[0]) < tol:
+            continue
+        
     raise NotImplementedError("row_echelon 을 구현하세요")
 
 
 def rank(A) -> int:
     """행 사다리꼴의 피벗 개수 = rank."""
-    # TODO: 문제 1-6
+    U, pivots, _ = row_echelon(A)
+    return len(pivots)
     raise NotImplementedError("rank 를 구현하세요")
 
 
@@ -179,7 +186,15 @@ def det(A) -> float:
     피벗이 n 개보다 적으면(특이행렬) 0.0 을 돌려준다.
     정사각 행렬이 아니면 ValueError.
     """
-    # TODO: 문제 1-6
+    U, pivots, swaps = row_echelon(A)
+    if len(pivots) < A.shape[0]:
+        return 0.0
+    det = 1.0
+    for i in range(A.shape[0]):
+        det *= U[i, i]
+    if swaps % 2 == 1:
+        det *= -1.0
+    return det
     raise NotImplementedError("det 을 구현하세요")
 
 
@@ -200,7 +215,7 @@ def gauss_eliminate(A, b, pivoting: bool = True, verbose: bool = False):
 
     피벗이 0 이면 해가 유일하지 않다 -> ZeroDivisionError.
     """
-    # TODO: 문제 4-1
+    U, pivots, swaps = row_echelon(A, pivoting=pivoting)
     raise NotImplementedError("gauss_eliminate 을 구현하세요")
 
 
@@ -210,5 +225,5 @@ def inverse_gauss_jordan(A) -> np.ndarray:
     정사각이 아니면 ValueError, 특이행렬이면 np.linalg.LinAlgError.
     (`np.linalg.inv` 를 부르지 말고 소거로 직접 구한다)
     """
-    # TODO: 문제 4-3
+    return 
     raise NotImplementedError("inverse_gauss_jordan 을 구현하세요")
