@@ -56,13 +56,16 @@ def dot(a, b) -> float:
 
     두 벡터의 차원이 다르면 ValueError.
     """
-    # TODO: 문제 1-1
+    dot = 0
+    for i in a*b:
+        dot += i
+    return dot
     raise NotImplementedError("dot 을 구현하세요")
 
 
 def norm(v) -> float:
     """유클리드 노름. sqrt(v·v) — 위에서 만든 dot 을 재사용한다."""
-    # TODO: 문제 1-1
+    return np.sqrt(dot(v,v))
     raise NotImplementedError("norm 을 구현하세요")
 
 
@@ -75,7 +78,7 @@ def angle_between(a, b, degrees: bool = True) -> float:
     주의 2. 부동소수점 오차로 |cos| 가 1 을 아주 조금 넘으면 arccos 가 nan 을 낸다.
             [-1, 1] 로 clip 해야 무작위 입력에서도 안전하다.
     """
-    # TODO: 문제 1-1
+    return np.arccos(dot(a,b)/ (norm(a)*norm(b)))
     raise NotImplementedError("angle_between 을 구현하세요")
 
 
@@ -87,7 +90,7 @@ def normalize(v, eps: float = 1e-12) -> np.ndarray:
     (2) 선택한 처리 방식과 근거를 마크다운에 적은 뒤, 그 방식대로 여기에 구현한다.
     선택에 따라 노트북/테스트의 검증 코드도 그 방식에 맞춰 작성한다.
     """
-    # TODO: 문제 1-2
+    return v / norm(v)
     raise NotImplementedError("normalize 를 구현하세요")
 
 
@@ -99,13 +102,13 @@ def project(a, b) -> np.ndarray:
     분모가 |b|^2 이므로 b 를 미리 정규화할 필요는 없다.
     b 가 영벡터면 ValueError.
     """
-    # TODO: 문제 1-3
+    return (dot(a,b) / dot(b,b)) * b
     raise NotImplementedError("project 를 구현하세요")
 
 
 def reject(a, b) -> np.ndarray:
     """a 에서 b 방향 성분을 뺀 나머지(수직 성분). a = project + reject 가 성립해야 한다."""
-    # TODO: 문제 1-3
+    return a - project(a,b)
     raise NotImplementedError("reject 을 구현하세요")
 
 
@@ -119,7 +122,7 @@ def skew(a) -> np.ndarray:
     만족해야 하는 성질: [a]_x @ b == a x b,  [a]_x.T == -[a]_x
     3차원이 아니면 ValueError.
     """
-    # TODO: 문제 1-4
+    return np.array([[-0, -a[2], a[1]], [a[2], 0, -a[0]], [-a[1], a[0], 0]])
     raise NotImplementedError("skew 를 구현하세요")
 
 
