@@ -128,7 +128,7 @@ def skew(a) -> np.ndarray:
 
 def cross(a, b) -> np.ndarray:
     """외적을 **반대칭행렬 곱으로** 계산한다 (`np.cross` 사용 금지)."""
-    # TODO: 문제 1-4
+    return skew(a) @ b
     raise NotImplementedError("cross 를 구현하세요")
 
 
@@ -138,7 +138,9 @@ def plane_normal(P1, P2, P3) -> np.ndarray:
     두 모서리 벡터(P2-P1, P3-P1)의 외적이 평면에 수직이다.
     세 점이 일직선이면 외적이 영벡터가 되어 평면이 하나로 정해지지 않는다 -> ValueError.
     """
-    # TODO: 문제 1-5
+    v1 = P2-P1
+    v2 = P3-P1
+    return normalize(cross(v1,v2))
     raise NotImplementedError("plane_normal 을 구현하세요")
 
 
@@ -161,6 +163,7 @@ def row_echelon(A, pivoting: bool = True):
           예) tol = max(m, n) * np.finfo(float).eps * max(1.0, np.max(np.abs(U)))
     """
     # TODO: 문제 1-6 / 문제 4
+    return 
     raise NotImplementedError("row_echelon 을 구현하세요")
 
 
